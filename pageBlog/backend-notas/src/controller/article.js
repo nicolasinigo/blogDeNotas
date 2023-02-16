@@ -1,6 +1,6 @@
 "use strict";
 
-const { createArticleService, findAllArticles, deleteService } = require("../model/article");
+const { createArticleService, findAllArticles, deleteService } = require("../service/article.js");
 
 
 
@@ -19,7 +19,7 @@ const createArticle = async (req, res) => {
 const getArticles = async (req, res) => {
     const response = await findAllArticles();
     if (response.length > 0) {
-        res.status(200).json({ article: response });
+        res.status(200).json({ articles: response });
     } else {
         res.status(404)
     };
@@ -27,8 +27,8 @@ const getArticles = async (req, res) => {
 };
 
 const deleteArticle = async (req, res) => {
-    const _id = body.params._id;
-    const article = await deleteService(_id);
+    const id = req.params.id;
+    const article = await deleteService(id);
     if (article > 0) {
         res.status(200).send("article eliminado");
 
