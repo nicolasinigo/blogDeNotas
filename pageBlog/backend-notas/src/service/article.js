@@ -15,7 +15,7 @@ const createArticleService = async (title, content, author) => {
     };
 };
 
-const findAllArticles = async() => {
+const findAllArticles = async () => {
     try {
         const articles = await articleSchema.find({}).select("-id").select("-__v");
         articles.sort('-date')
@@ -23,8 +23,20 @@ const findAllArticles = async() => {
     } catch (error) {
         return "";
     }
-    
+
+
+};
+
+const deleteService = async (_id) => {
+    try {
+        const article = await articleSchema.deleteOne({ _id: '${_id}' });
+        return article.deletedCount;
+
+    } catch (error) {
+        return "";
+    }
+
 
 }
 
-module.exports = {createArticleService, findAllArticles};
+module.exports = { createArticleService, findAllArticles, deleteService };

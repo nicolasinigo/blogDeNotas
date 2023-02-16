@@ -1,12 +1,13 @@
 "use strict";
-const {createArticle, getArticles} = require ("../controller/article.js");
+const { createArticle, getArticles, deleteArticle } = require("../controller/article.js");
 
 const express = require("express")
 
 const Router = express.Router();
 
-Router.post("/", createArticle);
-Router.get("/",getArticles);
+Router.post("/save", createArticle);
+Router.get("/articles", getArticles);
+Router.delete("/delete/:id", deleteArticle);
 
 
 module.exports = Router;
